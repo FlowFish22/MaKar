@@ -10,13 +10,11 @@ TODO: description of what you do in some details, with link to relevant docs.
 
 ## Contents
 
-TODO: description of the content.
-
 The repository is organized as follows:
 
-`demo/` Demonstration codes, which rely on the `dirac_operator` package.
+`demo/` Demonstration codes, which rely on the `finite_volume` package.
 
-`src/dirac_operator` Provides the `dirac_operator` package. 
+`src/dirac_operator` Provides the `finite_volume` package. 
 
 ## Development
 
