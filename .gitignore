@@ -107,3 +107,4 @@ dmypy.json
 *.pdf
 *.svg
 *.png
+.DS_Store
