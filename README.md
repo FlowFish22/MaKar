@@ -35,7 +35,7 @@ pip install -e .[dev]
 To use the environment in VS code, open the command palette: 
 
 - `File: Open Folder` and select root of this repository.
-- `Python: Select Interpreter` and select the `dirac_operator` conda environment.
+- `Python: Select Interpreter` and select the `finite_volume` conda environment.
 
 ## Background on how the repository is setup
 
