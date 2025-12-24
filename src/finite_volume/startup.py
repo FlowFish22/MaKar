@@ -15,4 +15,8 @@ if init_data == 0:
 else:
     print('NA')
     quit()
-    
+bdary = int(input('\nWhich bdary condn?:'
+                  '\n 0 = Periodic'))
+if bdary != 0:
+    print('NA')
+    quit()
