@@ -23,7 +23,7 @@ x_grid = fvm.generate_grid()
 # initialize the Riemann initial data
 u_0 = np.where(x_grid < strt.x, u_L, u_R)
 # implementing boundary condition
-u = bnd.per_bd(u_0)
+u = bnd.bd(u_0)
 # time integration
 for n in range(0, t_step_num):
     u_old = u.copy()
