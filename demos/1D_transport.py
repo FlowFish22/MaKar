@@ -1,4 +1,4 @@
-# A finite difference solver for linear advection in 1D
+# A finite difference explicit upwind scheme for linear advection in 1D
 import math
 
 import numpy as np
