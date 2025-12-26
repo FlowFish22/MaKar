@@ -19,37 +19,19 @@ bdary = int(input('\nWhich bdary condn?:'
                   '\n 0 = Periodic'
                   '\n 1= other'))
 if bdary != 0:
-    side = int(input('\n Which side?:'
-                     '\n 0 = Only left' # If only left boundary condition required
-                     '\n 1 = Only right' # If only right bondary condition required
-                     '\n 2 = All' )) # If boundary condition on  both the extremities are required
-    
-    if side == 0 or side == 1:
-        condn = int(input('\n Which condition?:'
-                          '\n 0 = Dirichlet'
-                          '\n 1 = Neumann'))
-        if condn == 0:
-            bd_val = float(input('\n Enter boundary value:'))
-        else:
-            print('NA')
-            quit()
-    else:
-            ls_condn = int(input('\n Left boundary condn?'
+    ls_condn = int(input('\n Left boundary condn?'
                                  '\n 0 = Dirichlet'
-                                 '\n 1 = Neumann'))
-            rs_condn = int(input('\n right boundary condn?'
+                                 '\n 1 = Extrapolation'
+                                 '\n 2 = None'))
+    rs_condn = int(input('\n right boundary condn?'
                                  '\n 0 = Dirichlet'
-                                 '\n 1 = Neumann'))
-            if ls_condn == 0:
-              bd_val_0 = float(input('\n Enter boundary value:'))  
-            else:
-                print('NA')
-                quit()
-            if rs_condn == 0:
-              bd_val_1 = float(input('\n Enter boundary value:'))  
-            else:
-                print('NA')
-                quit()
+                                 '\n 1 = Extrapolation'
+                                 '\n 2 = None'))
+    if ls_condn == 0:
+        bd_val_left = float(input('\n Enter left boundary value:'))
+    if rs_condn == 0:
+        bd_val_right = float(input('\n Enter right boundary value:'))
+   
 else:
     print('NA')
     quit()

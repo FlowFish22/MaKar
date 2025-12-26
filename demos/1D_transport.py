@@ -39,9 +39,12 @@ for n in range(1, t_step_num):
 #exact solution
 u_exact = np.where(x_grid < strt.x + a * T, u_L, u_R)
 
-if strt.side == 0 or strt.side == 1:
-    u_plt = u[1:] if strt.side == 0 else u[:-1]
-elif strt.side == 2:
+if strt.ls_condn == 2 or strt.rs_condn == 2:
+    if strt.ls_condn == 2:
+        u_plt = u[:-1]
+    if strt.rs_condn == 2:
+        u_plt = u[1:]
+else:
     u_plt = u[1:-1]
 
 f, ax = plt.subplots(layout="constrained")
