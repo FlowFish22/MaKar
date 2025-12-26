@@ -1,3 +1,4 @@
+# A finite difference solver for linear advection in 1D
 import math
 
 import numpy as np
@@ -13,7 +14,7 @@ a = strt.speed # Constant advection
 u_L, u_R = 2.0, 1.0  # Left and right values
 #x_size = 50  # Grid size
 #x_num = x_size - 1
-T = 2.0 # Final time
+T = 0.75 # Final time
 dt = 1.0/1000.0  # Time-step
 dx = 1/strt.x_num
 t_step_num = math.floor(T / dt)
@@ -24,28 +25,28 @@ x_grid = fvm.generate_grid()
 u_0 = np.where(x_grid < strt.x, u_L, u_R)
 # implementing boundary condition
 u = bnd.bd(u_0)
-# time integration
-for n in range(0, t_step_num):
+# time integration and upwind update
+def f_up(u, v):
+    f = a * (1.0/dx) * (u - v) #finite difference gradient
+    return f
+for n in range(1, t_step_num):
     u_old = u.copy()
-    for i in range(0, strt.x_num - 1):
-        u[i] = u_old[i] - a * dt *(1.0/dx) * (u_old[i] - u_old[i-1])
-#   
-#    for i in range(0, strt.x_num - 1):
-#        u[i] = u[i] + a * dt * (1.0 / (strt.x_num - 1.0)) * (u[i + 1] - u[i])
-#with open("sol.dat", "w") as sol:
-#    for i in range(0, strt.x_num):
-#       sl = "{}\t{}\n"
-#        sol.write(sl.format(x_grid[i], u[i]))
-#    sol.close()
+    for i in range(1, strt.x_num - 1):
+        Flx = f_up(u_old[i], u_old[i-1]) if a>=0 else f_up(u_old[i+1], u_old[i]) #upwind flux
+        u[i] = u_old[i] - dt * Flx
+
 
 #exact solution
 u_exact = np.where(x_grid < strt.x + a * T, u_L, u_R)
 
-u_plt = u[:-1]
+if strt.side == 0 or strt.side == 1:
+    u_plt = u[1:] if strt.side == 0 else u[:-1]
+elif strt.side == 2:
+    u_plt = u[1:-1]
 
 f, ax = plt.subplots(layout="constrained")
 ax.plot(x_grid, u_plt, label="Computed", linestyle="-", color="b")
 ax.plot(x_grid, u_exact, label="Exact", linestyle="--", color="r")
 ax.plot(x_grid, u_0, label="initial", linestyle="-", color="g")
-ax.set_title("Some Mainak mischief")
+ax.set_title("1D linear advection")
 f.legend()
